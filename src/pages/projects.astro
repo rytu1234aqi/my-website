@@ -1,9 +1,181 @@
 ---
----
-<h1>Projects</h1>
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
 
-<ul>
-  <li>Unity Game Demo</li>
-  <li>AI Dance Recognition</li>
-  <li>Computer Vision Project</li>
-</ul>
+const projects = [
+  {
+    title: 'Unity Game Demo',
+    description: 'An interactive game prototype with custom mechanics, physics-based gameplay, and polished visual effects. Built from the ground up in Unity with a focus on player experience.',
+    tags: ['Unity', 'C#', 'Game Design', 'Shader'],
+    icon: '🎮',
+    status: 'In Progress',
+  },
+  {
+    title: 'AI Dance Recognition',
+    description: 'Real-time dance move recognition powered by machine learning. Uses pose estimation to analyze body movements and classify dance styles with high accuracy.',
+    tags: ['Python', 'TensorFlow', 'MediaPipe', 'AI/ML'],
+    icon: '💃',
+    status: 'Completed',
+  },
+  {
+    title: 'Computer Vision Project',
+    description: 'Exploring advanced image processing techniques including object detection, image segmentation, and visual intelligence using deep learning approaches.',
+    tags: ['Python', 'OpenCV', 'PyTorch', 'Deep Learning'],
+    icon: '👁️',
+    status: 'Completed',
+  },
+];
+---
+
+<Layout title="Projects — Game Developer">
+  <section class="page-header">
+    <div class="container">
+      <p class="section-label animate-slide-up">// Projects</p>
+      <h1 class="animate-slide-up delay-1">Things I've built.</h1>
+      <p class="page-desc animate-slide-up delay-2">
+        A collection of projects spanning game development, artificial intelligence, and computer vision.
+      </p>
+    </div>
+  </section>
+
+  <section class="projects-section">
+    <div class="container">
+      <div class="projects-list">
+        {projects.map((project, i) => (
+          <div class={`project-item animate-slide-up delay-${i + 1}`}>
+            <div class="project-left">
+              <div class="project-icon">{project.icon}</div>
+            </div>
+            <div class="project-right">
+              <div class="project-header">
+                <h2>{project.title}</h2>
+                <span class:list={['status-badge', project.status === 'Completed' ? 'completed' : 'progress']}>
+                  {project.status}
+                </span>
+              </div>
+              <p class="project-desc">{project.description}</p>
+              <div class="project-tags">
+                {project.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding-top: 140px;
+    padding-bottom: 60px;
+  }
+
+  .page-header h1 {
+    margin-bottom: 16px;
+  }
+
+  .page-desc {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+  }
+
+  .projects-section {
+    padding-bottom: 80px;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .project-item {
+    display: flex;
+    gap: 28px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    transition: all var(--transition-smooth);
+  }
+
+  .project-item:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .project-left {
+    flex-shrink: 0;
+  }
+
+  .project-icon {
+    font-size: 2.5rem;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-surface-hover);
+    border-radius: var(--radius-md);
+  }
+
+  .project-right {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .project-header h2 {
+    font-size: 1.35rem;
+  }
+
+  .status-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .status-badge.completed {
+    background: rgba(40, 200, 64, 0.12);
+    color: #28c840;
+  }
+
+  .status-badge.progress {
+    background: rgba(254, 188, 46, 0.12);
+    color: #febc2e;
+  }
+
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .project-item {
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+    }
+  }
+</style>

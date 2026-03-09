@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+const links = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com',
+    description: 'Check out my code and open source projects',
+  },
+  {
+    label: 'Email',
+    href: 'mailto:hello@example.com',
+    description: 'Send me a message for collaborations or inquiries',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com',
+    description: 'Connect with me professionally',
+  },
+];
+---
+
+<Layout title="Contact — Game Developer">
+  <section class="page-header">
+    <div class="container">
+      <p class="section-label animate-slide-up">// Contact</p>
+      <h1 class="animate-slide-up delay-1">Get in touch.</h1>
+      <p class="page-desc animate-slide-up delay-2">
+        Have a question, project idea, or just want to say hello?<br />
+        Feel free to reach out through any of the channels below.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-links">
+        {links.map((link, i) => (
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener' : undefined}
+            class={`contact-card animate-slide-up delay-${i + 2}`}
+          >
+            <div class="contact-info">
+              <h2>{link.label}</h2>
+              <p>{link.description}</p>
+            </div>
+            <span class="contact-arrow">→</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="contact-note animate-slide-up delay-5">
+        <p>I typically respond within a few days. Looking forward to hearing from you!</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding-top: 140px;
+    padding-bottom: 60px;
+  }
+
+  .page-header h1 {
+    margin-bottom: 16px;
+  }
+
+  .page-desc {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .contact-section {
+    padding-bottom: 80px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+  }
+
+  .contact-card:hover {
+    border-color: var(--border-light);
+    transform: translateX(8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .contact-card:hover .contact-arrow {
+    transform: translateX(4px);
+    color: var(--accent-blue);
+  }
+
+  .contact-info h2 {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+  }
+
+  .contact-info p {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .contact-arrow {
+    font-size: 1.25rem;
+    color: var(--text-tertiary);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .contact-note {
+    margin-top: 64px;
+    max-width: 640px;
+  }
+
+  .contact-note p {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+</style>

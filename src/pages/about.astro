@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+const skills = {
+  'Languages': ['C#', 'Python', 'JavaScript', 'C++', 'GLSL'],
+  'Frameworks & Tools': ['Unity', 'Unreal Engine', 'OpenCV', 'TensorFlow', 'Git'],
+  'Areas': ['Game Development', 'Computer Vision', 'Machine Learning', 'Shader Programming'],
+};
+---
+
+<Layout title="About — Game Developer">
+  <section class="page-header">
+    <div class="container">
+      <p class="section-label animate-slide-up">// About</p>
+      <h1 class="animate-slide-up delay-1">About me.</h1>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <!-- Bio -->
+        <div class="bio animate-slide-up delay-2">
+          <p class="bio-text">
+            I'm a Computer Science student passionate about game development and interactive media.
+            I love exploring the intersection of technology and creativity — from building immersive game
+            experiences in Unity to training AI models that understand human movement.
+          </p>
+          <p class="bio-text">
+            When I'm not coding, I'm probably playing games, experimenting with shaders,
+            or diving into the latest research in computer vision and artificial intelligence.
+          </p>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-section animate-slide-up delay-3">
+          <h2>Skills & Technologies</h2>
+          <div class="skills-grid">
+            {Object.entries(skills).map(([category, items]) => (
+              <div class="skill-group">
+                <h3 class="skill-category">{category}</h3>
+                <div class="skill-tags">
+                  {items.map((item) => (
+                    <span class="tag">{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="education-section animate-slide-up delay-4">
+          <h2>Education</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h3>Computer Science</h3>
+                <p class="timeline-subtitle">Bachelor's Degree · In Progress</p>
+                <p class="timeline-desc">
+                  Focusing on game programming, computer graphics, and artificial intelligence.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interests -->
+        <div class="interests-section animate-slide-up delay-5">
+          <h2>Interests</h2>
+          <div class="interests-grid">
+            <div class="interest-item">
+              <span class="interest-icon">🎮</span>
+              <span>Game Design</span>
+            </div>
+            <div class="interest-item">
+              <span class="interest-icon">🤖</span>
+              <span>AI & ML</span>
+            </div>
+            <div class="interest-item">
+              <span class="interest-icon">🎨</span>
+              <span>Shader Art</span>
+            </div>
+            <div class="interest-item">
+              <span class="interest-icon">📷</span>
+              <span>Computer Vision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding-top: 140px;
+    padding-bottom: 40px;
+  }
+
+  .about-section {
+    padding-bottom: 80px;
+  }
+
+  .about-content {
+    max-width: 680px;
+  }
+
+  .bio {
+    margin-bottom: 64px;
+  }
+
+  .bio-text {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1em;
+  }
+
+  .bio-text:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Skills */
+  .skills-section {
+    margin-bottom: 64px;
+  }
+
+  .skills-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .skill-category {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Education */
+  .education-section {
+    margin-bottom: 64px;
+  }
+
+  .education-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 20px;
+  }
+
+  .timeline-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .timeline-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  /* Interests */
+  .interests-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .interest-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+  }
+
+  .interest-item:hover {
+    border-color: var(--border-light);
+    color: var(--text-primary);
+  }
+
+  .interest-icon {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    .interests-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx astro build)",
+      "Bash(where npm.cmd)",
+      "Bash(where node)",
+      "Bash(taskkill //F //IM node.exe)"
+    ]
+  }
+}
