@@ -4,15 +4,15 @@ interface Props {
   description?: string;
 }
 
-const { title = 'Game Developer', description = 'Game Developer & Computer Science Student' } = Astro.props;
+const { title = '游戏开发者', description = '游戏开发者 & 计算机科学学生' } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: '首页' },
+  { href: '/projects', label: '项目' },
+  { href: '/blog', label: '博客' },
+  { href: '/about', label: '关于' },
+  { href: '/contact', label: '联系' },
 ];
 ---
 
@@ -30,27 +30,62 @@ const navLinks = [
       rel="stylesheet"
     />
     <title>{title}</title>
+    
+    <!-- 主题初始化脚本 - 防止闪烁 -->
+    <script is:inline>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body>
+    <!-- Nav Trigger Area -->
+    <div class="nav-trigger"></div>
     <nav class="nav">
       <div class="nav-inner container">
         <a href="/" class="nav-logo">
           <span class="nav-logo-symbol">&lt;/&gt;</span>
         </a>
-        <div class="nav-links">
-          {navLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={['nav-link', { active: currentPath === link.href }]}
-            >
-              {link.label}
-            </a>
-          ))}
+        <div class="nav-right">
+          <div class="nav-links">
+            {navLinks.map((link) => (
+              <a
+                href={link.href}
+                class:list={['nav-link', { active: currentPath === link.href }]}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <!-- 主题切换按钮 -->
+          <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+            <div class="theme-icon-container">
+              <!-- 月亮图标（亮色模式下显示，点击切换到暗色） -->
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              <!-- 太阳图标（暗色模式下显示，点击切换到亮色） -->
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </div>
+          </button>
+          <button class="nav-toggle" aria-label="切换菜单" id="nav-toggle">
+            <span></span>
+            <span></span>
+          </button>
         </div>
-        <button class="nav-toggle" aria-label="Toggle menu" id="nav-toggle">
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </nav>
 
@@ -76,37 +111,89 @@ const navLinks = [
       <div class="container">
         <div class="footer-inner">
           <p class="footer-text">
-            Built with <span class="gradient-text">Astro</span> · Designed with care
+            用 <span class="gradient-text">Astro</span> 构建 · 用心设计
           </p>
           <div class="footer-links">
             <a href="https://github.com" target="_blank" rel="noopener" class="footer-link">GitHub</a>
             <span class="footer-divider">·</span>
-            <a href="mailto:hello@example.com" class="footer-link">Email</a>
+            <a href="mailto:hello@example.com" class="footer-link">邮箱</a>
           </div>
         </div>
       </div>
     </footer>
 
     <script>
+      // 移动端菜单切换
       const toggle = document.getElementById('nav-toggle');
       const menu = document.getElementById('mobile-menu');
+      const nav = document.querySelector('.nav');
 
       toggle?.addEventListener('click', () => {
         menu?.classList.toggle('open');
         toggle.classList.toggle('open');
+        nav?.classList.toggle('nav-visible'); // Keep nav visible when menu open
       });
 
-      // Close mobile menu on link click
+      // 点击链接后关闭移动端菜单
       menu?.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
           menu.classList.remove('open');
           toggle?.classList.remove('open');
+          nav?.classList.remove('nav-visible');
         });
       });
+
+      // 主题切换功能
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+
+      // 获取当前主题
+      function getCurrentTheme() {
+        return html.getAttribute('data-theme') || 'dark';
+      }
+
+      // 切换主题
+      function toggleTheme() {
+        const currentTheme = getCurrentTheme();
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      }
+
+      themeToggle?.addEventListener('click', toggleTheme);
     </script>
 
     <style>
       /* ===== Navigation ===== */
+      /* Trigger Area */
+      .nav-trigger {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 16px;
+        z-index: 101;
+        background: transparent;
+      }
+
+      /* Optional: subtle hint line at the top */
+      .nav-trigger::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        opacity: 0.5;
+        transition: opacity 0.3s;
+      }
+
+      .nav-trigger:hover::after {
+        opacity: 1;
+      }
+
       .nav {
         position: fixed;
         top: 0;
@@ -114,37 +201,55 @@ const navLinks = [
         right: 0;
         z-index: 100;
         background: var(--bg-glass);
-        backdrop-filter: saturate(180%) blur(20px);
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border-subtle);
+        transform: translateY(-100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+      }
+
+      /* Show nav when trigger is hovered OR nav itself is hovered */
+      .nav-trigger:hover ~ .nav,
+      .nav:hover,
+      .nav:focus-within {
+        transform: translateY(0);
+      }
+      
+      /* Keep nav visible when mobile menu is open */
+      .nav:has(+ .mobile-menu.open) {
+        transform: translateY(0);
+      }
+      
+      /* Also handle browsers that don't support :has or simple adjacent logic via JS class */
+      .nav.nav-visible {
+        transform: translateY(0);
       }
 
       .nav-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 56px;
+        height: 70px;
       }
 
       .nav-logo {
         font-family: var(--font-mono);
-        font-size: 1.15rem;
-        font-weight: 600;
+        font-size: 1.25rem;
+        font-weight: 700;
         color: var(--text-primary);
         text-decoration: none;
-        transition: opacity var(--transition-fast);
-      }
-
-      .nav-logo:hover {
-        opacity: 0.7;
-        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .nav-logo-symbol {
-        background: var(--accent-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--accent-blue);
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
       }
 
       .nav-links {
@@ -185,6 +290,34 @@ const navLinks = [
         border: none;
         cursor: pointer;
         padding: 4px;
+        margin-left: 16px;
+      }
+      
+      @media (max-width: 768px) {
+        .nav-toggle {
+          display: flex;
+        }
+        
+        .nav-links {
+          display: none;
+        }
+        
+        /* On mobile, keep nav visible or use a different trigger? 
+           User request implies mouse hover, which is desktop-first.
+           On mobile, auto-hide is tricky. Let's keep it fixed or visible on scroll up.
+           For now, let's keep the desktop behavior but make trigger larger on mobile?
+           Actually, hover doesn't work well on mobile. 
+           Let's make nav always visible on mobile or stick to top?
+           
+           Better: Disable auto-hide on mobile for usability.
+        */
+        .nav {
+          transform: translateY(0);
+        }
+        
+        .nav-trigger {
+          display: none;
+        }
       }
 
       .nav-toggle span {
