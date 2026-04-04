@@ -10,18 +10,18 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props;
-const date = new Date(frontmatter.date).toLocaleDateString('en-US', {
+const date = new Date(frontmatter.date).toLocaleDateString('zh-CN', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
 ---
 
-<Layout title={`${frontmatter.title} — Blog`}>
+<Layout title={`${frontmatter.title} — 博客`}>
   <article class="blog-post">
     <div class="container">
       <header class="post-header animate-slide-up">
-        <a href="/blog" class="back-link">← Back to Blog</a>
+        <a href="/blog" class="back-link">← 返回博客</a>
         <time class="post-date">{date}</time>
         <h1 class="post-title">{frontmatter.title}</h1>
       </header>

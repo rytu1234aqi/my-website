@@ -8,13 +8,13 @@ const sortedPosts = Object.values(allPosts)
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 
-<Layout title="Blog — Game Developer">
+<Layout title="博客 — 游戏开发者">
   <section class="page-header">
     <div class="container">
-      <p class="section-label animate-slide-up">// Blog</p>
-      <h1 class="animate-slide-up delay-1">Thoughts & notes.</h1>
+      <p class="section-label animate-slide-up">// 博客</p>
+      <h1 class="animate-slide-up delay-1">想法与笔记。</h1>
       <p class="page-desc animate-slide-up delay-2">
-        Writing about game development, programming, and things I learn along the way.
+        记录关于游戏开发、编程以及一路上学到的东西。
       </p>
     </div>
   </section>
@@ -23,9 +23,9 @@ const sortedPosts = Object.values(allPosts)
     <div class="container">
       <div class="posts-list">
         {sortedPosts.map((post, i) => {
-          const date = new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+          const date = new Date(post.frontmatter.date).toLocaleDateString('zh-CN', {
             year: 'numeric',
-            month: 'short',
+            month: 'long',
             day: 'numeric',
           });
           return (
@@ -40,7 +40,7 @@ const sortedPosts = Object.values(allPosts)
 
       {sortedPosts.length === 0 && (
         <div class="empty-state animate-slide-up">
-          <p>No posts yet. Stay tuned!</p>
+          <p>暂无文章，敬请期待！</p>
         </div>
       )}
     </div>

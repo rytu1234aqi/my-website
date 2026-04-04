@@ -4,13 +4,13 @@ import '../styles/global.css';
 import { projects } from '../data/projects';
 ---
 
-<Layout title="Projects — Game Developer">
+<Layout title="项目 — 游戏开发者">
   <section class="page-header">
     <div class="container">
-      <p class="section-label animate-slide-up">// Projects</p>
-      <h1 class="animate-slide-up delay-1">Things I've built.</h1>
+      <p class="section-label animate-slide-up">// 项目</p>
+      <h1 class="animate-slide-up delay-1">我做过的东西。</h1>
       <p class="page-desc animate-slide-up delay-2">
-        A collection of projects spanning game development, artificial intelligence, and computer vision.
+        涵盖游戏开发、人工智能和计算机视觉的项目合集。
       </p>
     </div>
   </section>
@@ -27,7 +27,7 @@ import { projects } from '../data/projects';
               <div class="project-header">
                 <h2>{project.title}</h2>
                 <span class:list={['status-badge', project.status === 'Completed' ? 'completed' : 'progress']}>
-                  {project.status}
+                  {project.status === 'Completed' ? '已完成' : '进行中'}
                 </span>
               </div>
               <p class="project-desc">{project.description}</p>
