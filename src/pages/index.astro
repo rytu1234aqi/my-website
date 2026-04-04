@@ -8,29 +8,29 @@ const mainProject = featuredProjects[0];
 const subProjects = featuredProjects.slice(1, 3);
 ---
 
-<Layout title="DevPortfolio — Code & Design">
-  <!-- Hero Section -->
+<Layout title="DevPortfolio — 代码与设计">
+  <!-- 主视觉区域 -->
   <section class="hero-section">
     <div class="container hero-container">
       <div class="hero-content animate-fade-in">
         <div class="status-badge">
-          <span class="status-dot"></span> Available for new projects
+          <span class="status-dot"></span> 接受新项目合作
         </div>
         <h1 class="hero-title">
-          Building <span class="gradient-text">Digital</span><br>
-          Experiences
+          构建<span class="gradient-text">数字化</span><br>
+          体验
         </h1>
         <p class="hero-description">
-          I'm a Full Stack Developer & UI Designer based in Cyber City. 
-          I craft high-performance websites and interactive applications with modern technologies.
+          我是一名全栈开发者 & UI 设计师。
+          擅长使用现代技术打造高性能网站和交互式应用。
         </p>
         <div class="hero-actions">
-          <a href="/projects" class="btn btn-primary">View Work</a>
-          <a href="/contact" class="btn btn-secondary">Contact Me</a>
+          <a href="/projects" class="btn btn-primary">查看作品</a>
+          <a href="/contact" class="btn btn-secondary">联系我</a>
         </div>
-        
+
         <div class="tech-stack-mini">
-          <span>Stack:</span>
+          <span>技术栈:</span>
           <div class="stack-icons">
             <span class="stack-icon" title="React">⚛️</span>
             <span class="stack-icon" title="TypeScript">TS</span>
@@ -51,7 +51,7 @@ const subProjects = featuredProjects.slice(1, 3);
           <div class="code-body">
             <div class="line"><span class="kwd">interface</span> <span class="cls">Developer</span> &#123;</div>
             <div class="line indent"><span class="prop">name</span>: <span class="str">'Alex'</span>;</div>
-            <div class="line indent"><span class="prop">role</span>: <span class="str">'Full Stack'</span>;</div>
+            <div class="line indent"><span class="prop">role</span>: <span class="str">'全栈开发'</span>;</div>
             <div class="line indent"><span class="prop">passion</span>: <span class="str">'UI/UX'</span>;</div>
             <div class="line">&#125;</div>
             <div class="line"></div>
@@ -65,21 +65,21 @@ const subProjects = featuredProjects.slice(1, 3);
     </div>
   </section>
 
-  <!-- Featured Projects -->
+  <!-- 精选项目 -->
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Selected <span class="gradient-text">Work</span></h2>
-        <a href="/projects" class="btn-link">All Projects</a>
+        <h2 class="section-title">精选<span class="gradient-text">作品</span></h2>
+        <a href="/projects" class="btn-link">全部项目</a>
       </div>
 
       <div class="bento-grid">
-        <!-- Main Project -->
+        <!-- 主打项目 -->
         {mainProject && (
           <a href={mainProject.link || '/projects'} class="card bento-main animate-fade-in delay-1">
             <div class="card-content">
               <div class="project-meta">
-                <span class="tag">Featured</span>
+                <span class="tag">精选</span>
                 {mainProject.year && <span class="year">{mainProject.year}</span>}
               </div>
               <h3>{mainProject.title}</h3>
@@ -89,13 +89,12 @@ const subProjects = featuredProjects.slice(1, 3);
               </div>
             </div>
             <div class="card-visual visual-main">
-              <!-- Abstract UI representation -->
               <div class="ui-mockup"></div>
             </div>
           </a>
         )}
 
-        <!-- Sub Projects -->
+        <!-- 其他项目 -->
         {subProjects.map((project, index) => (
           <a href={project.link || '/projects'} class={`card bento-sub animate-fade-in delay-${index + 2}`}>
             <div class="card-icon">{project.icon}</div>
@@ -107,11 +106,11 @@ const subProjects = featuredProjects.slice(1, 3);
           </a>
         ))}
 
-        <!-- Blog Link -->
+        <!-- 博客链接 -->
         <a href="/blog" class="card bento-blog animate-fade-in delay-3">
           <div class="blog-content">
-            <h3>Latest Thoughts</h3>
-            <p>Read my articles on web development and design engineering.</p>
+            <h3>最新想法</h3>
+            <p>阅读我关于 Web 开发和设计工程的文章。</p>
             <span class="arrow-icon">→</span>
           </div>
         </a>
@@ -119,14 +118,14 @@ const subProjects = featuredProjects.slice(1, 3);
     </div>
   </section>
 
-  <!-- CTA Section -->
+  <!-- 合作邀约 -->
   <section class="section cta-section">
     <div class="container">
       <div class="card cta-card animate-fade-in">
         <div class="cta-content">
-          <h2>Let's work together</h2>
-          <p>Have a project in mind? I'm available for freelance work and collaborations.</p>
-          <a href="/contact" class="btn btn-primary">Get in Touch</a>
+          <h2>一起合作吧</h2>
+          <p>有项目想法？我可以接受自由职业合作与项目协作。</p>
+          <a href="/contact" class="btn btn-primary">联系我</a>
         </div>
       </div>
     </div>
